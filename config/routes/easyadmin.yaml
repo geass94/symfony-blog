@@ -1,0 +1,7 @@
+easyadmin:
+    resource: .
+    type: easyadmin.routes
+admin_controllers:
+    resource: ../../src/Controller/Admin
+    type: attribute
+    prefix: /admin
