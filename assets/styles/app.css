@@ -1,3 +1,141 @@
-body {
-    background-color: skyblue;
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f9fafb;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Layout Containers */
+.container {
+    width: 90%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    border-radius: 10px;
+}
+
+/* Header */
+header {
+    background: #111827;
+    color: #fff;
+    padding: 2rem 0;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+header h1 {
+    font-size: 2rem;
+}
+
+header a {
+    color: #ddd;
+    text-decoration: none;
+}
+
+header a:hover {
+    text-decoration: underline;
+}
+
+/* Footer */
+footer {
+    background: #1f2937;
+    color: #9ca3af;
+    text-align: center;
+    padding: 1rem 0;
+    font-size: 0.9rem;
+    margin-top: 2rem;
+}
+
+/* Blog Post List */
+.post {
+    background: #ffffff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    transition: transform 0.2s;
+}
+
+.post:hover {
+    transform: translateY(-3px);
+}
+
+.post-title {
+    font-size: 1.75rem;
+    color: #1f2937;
+    margin-bottom: 0.3rem;
+}
+
+.post-title a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.post-title a:hover {
+    color: #2563eb;
+}
+
+.post-meta {
+    font-size: 0.9rem;
+    color: #6b7280;
+    margin-bottom: 1rem;
+}
+
+a {
+    color: #2563eb;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Typography */
+h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+/* Single Post Page */
+.post p {
+    margin-top: 1rem;
+    font-size: 1.1rem;
+}
+
+/* Navigation */
+.nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.site-title {
+    font-size: 1.8rem;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+}
+
+.nav-links li a {
+    color: #d1d5db;
+    font-size: 1rem;
+    transition: color 0.2s;
+}
+
+.nav-links li a:hover {
+    color: #ffffff;
+}
+
