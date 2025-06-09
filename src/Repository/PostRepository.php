@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Post;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\DBAL\Connection;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -16,28 +17,40 @@ class PostRepository extends ServiceEntityRepository
         parent::__construct($registry, Post::class);
     }
 
-    //    /**
-    //     * @return Post[] Returns an array of Post objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('p')
-    //            ->andWhere('p.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('p.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+    public function findLatestPostsByCategories(array $categoryIds, int $limitPerCategory = 3): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
 
-    //    public function findOneBySomeField($value): ?Post
-    //    {
-    //        return $this->createQueryBuilder('p')
-    //            ->andWhere('p.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+        $sql = '
+        SELECT p.*, pc.category_id
+        FROM post p
+        INNER JOIN post_category pc ON p.id = pc.post_id
+        WHERE pc.category_id IN (:categoryIds)
+        ORDER BY pc.category_id, p.created_at DESC
+    ';
+
+        // Use executeQuery on Connection, not on prepared statement
+        $stmt = $conn->executeQuery(
+            $sql,
+            ['categoryIds' => $categoryIds],
+            ['categoryIds' => Connection::PARAM_INT_ARRAY]
+        );
+
+        $rows = $stmt->fetchAll();
+
+        $postsByCategory = [];
+
+        foreach ($rows as $row) {
+            $catId = $row['category_id'];
+            if (!isset($postsByCategory[$catId])) {
+                $postsByCategory[$catId] = [];
+            }
+            if (count($postsByCategory[$catId]) < $limitPerCategory) {
+                $postsByCategory[$catId][] = $row;
+            }
+        }
+
+        return $postsByCategory;
+    }
+
 }

@@ -9,12 +9,19 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    {% for cat in categories %}
+        {% set group = posts[cat.id] ?? [] %}
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>/home/geass/sideprojects/weee-task/blog/src/Controller/HomeController.php</code></li>
-        <li>Your template at <code>/home/geass/sideprojects/weee-task/blog/templates/home/index.html.twig</code></li>
-    </ul>
+        {% if group is not empty %}
+            <h2><a href="{{ path('app_show_category', { catId: cat.id }) }}">{{ cat.name }}</a></h2>
+
+            {% for post in group %}
+                <div>
+                    <h3>{{ post.title }}</h3>
+                    <p>{{ post.content|raw }}</p>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endfor %}
 </div>
 {% endblock %}

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Category;
 use App\Entity\Post;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -10,7 +11,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class PostController extends AbstractController
 {
-    public function __construct(private EntityManagerInterface $em)
+    public function __construct(private readonly EntityManagerInterface $em)
     {
     }
 
@@ -21,6 +22,22 @@ final class PostController extends AbstractController
         return $this->render('post/index.html.twig', [
             'controller_name' => 'PostController',
             'posts' => $repo->findAll(),
+        ]);
+    }
+
+    #[Route('/post/category/{catId}', name: 'app_show_category')]
+    public function categories(int $catId): Response
+    {
+        $categoryRepo = $this->em->getRepository(Category::class);
+        $category = $categoryRepo->find($catId);
+
+        if (!$category) {
+            throw $this->createNotFoundException('Category not found.');
+        }
+
+        return $this->render('post/index.html.twig', [
+            'category' => $category,
+            'posts' => $category->getPosts(),
         ]);
     }
 
