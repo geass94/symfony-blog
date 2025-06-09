@@ -139,3 +139,98 @@ h2 {
     color: #ffffff;
 }
 
+/* Login page container */
+.login-container {
+    max-width: 400px;
+    margin: 2rem auto 4rem;
+    padding: 2rem 2.5rem;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+}
+
+/* Form title */
+.form-title {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: #111827;
+    text-align: center;
+}
+
+/* Form labels */
+.form-label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #374151;
+}
+
+/* Form inputs */
+.form-input {
+    width: 100%;
+    padding: 0.6rem 0.8rem;
+    margin-bottom: 1.5rem;
+    border: 1.5px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+}
+
+.form-input:focus {
+    border-color: #2563eb;
+    outline: none;
+    box-shadow: 0 0 5px rgba(37, 99, 235, 0.5);
+}
+
+/* Remember me checkbox */
+.form-remember {
+    margin-bottom: 1.8rem;
+    font-size: 0.95rem;
+    color: #4b5563;
+}
+
+.form-remember input[type="checkbox"] {
+    margin-right: 0.5rem;
+    transform: scale(1.1);
+}
+
+/* Submit button */
+.btn-submit {
+    width: 100%;
+    background-color: #2563eb;
+    border: none;
+    color: white;
+    font-size: 1.1rem;
+    padding: 0.7rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.btn-submit:hover {
+    background-color: #1e40af;
+}
+
+/* Alert box for errors */
+.alert {
+    background-color: #fee2e2;
+    color: #b91c1c;
+    border-radius: 6px;
+    padding: 0.8rem 1rem;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+/* Logged in message */
+.logged-in-msg {
+    background: #d1fae5;
+    color: #065f46;
+    border-radius: 6px;
+    padding: 0.8rem 1rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-weight: 600;
+}
+
