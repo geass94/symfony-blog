@@ -1,0 +1,19 @@
+App\Entity\Category:
+    type: entity
+    repositoryClass: App\Repository\CategoryRepository
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+        slug:
+            type: string
+            length: 255
+    manyToMany:
+        posts:
+            targetEntity: App\Entity\Post
+            mappedBy: categories

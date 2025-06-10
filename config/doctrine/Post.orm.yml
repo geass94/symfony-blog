@@ -1,0 +1,42 @@
+App\Entity\Post:
+    type: entity
+    repositoryClass: App\Repository\PostRepository
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    lifecycleCallbacks:
+        prePersist: [ generateSlug ]
+        preUpdate: [ generateSlug ]
+    fields:
+        title:
+            type: string
+            length: 255
+        shortDescription:
+            type: string
+            length: 255
+        image:
+            type: string
+            length: 255
+        content:
+            type: string
+            length: 255
+            nullable: true
+        createdAt:
+            type: datetime
+        slug:
+            type: string
+            length: 255
+    oneToMany:
+        comments:
+            targetEntity: App\Entity\Comment
+            mappedBy: post
+            cascade: [ "persist" ]
+            orphanRemoval: true
+    manyToMany:
+        categories:
+            targetEntity: App\Entity\Category
+            inversedBy: posts
+            joinTable:
+                name: post_category

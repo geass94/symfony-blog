@@ -1,0 +1,35 @@
+App\Entity\Comment:
+    type: entity
+    repositoryClass: App\Repository\CommentRepository
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        author:
+            type: string
+            length: 255
+            nullable: false
+        content:
+            type: string
+            length: 255
+            nullable: false
+        createdAt:
+            type: datetime
+            nullable: false
+    manyToOne:
+        post:
+            targetEntity: App\Entity\Post
+            inversedBy: comments
+            joinColumn:
+                name: post_id
+                referencedColumnName: id
+                nullable: false
+        user:
+            targetEntity: App\Entity\User
+            inversedBy: comments
+            joinColumn:
+                name: user_id
+                referencedColumnName: id
+                nullable: true

@@ -2,44 +2,21 @@
 
 namespace App\Entity;
 
-use App\Repository\PostRepository;
 use Cocur\Slugify\Slugify;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: PostRepository::class)]
-#[ORM\HasLifecycleCallbacks]
 class Post
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
+
     private ?int $id = null;
-
-    #[ORM\Column(length: 255)]
     private ?string $title = null;
-
-    #[ORM\Column(length: 255)]
     private ?string $shortDescription = null;
-
-    #[ORM\Column(length: 255)]
     private ?string $image = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
     private ?string $content = null;
-
-    #[ORM\Column]
     private ?\DateTime $createdAt = null;
-
-    #[ORM\Column(length: 255)]
     private ?string $slug = null;
-
-    #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'post', cascade: ['persist'], orphanRemoval: true)]
     private Collection $comments;
-
-    #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'posts')]
-    #[ORM\JoinTable(name: 'post_category')]
     private Collection $categories;
 
     public function __construct()
@@ -49,8 +26,6 @@ class Post
         $this->createdAt = new \DateTime();
     }
 
-    #[ORM\PrePersist]
-    #[ORM\PreUpdate]
     public function generateSlug(): void
     {
         $slugify = new Slugify();
