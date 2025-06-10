@@ -11,5 +11,32 @@
         <p>{{ post.content|raw }}</p>
     </div>
 
+    <hr>
+
+    <h3 class="comments-title">Comments</h3>
+    <ul class="comments-list">
+        {% for comment in post.comments %}
+            <li class="comment-item">
+                {{ comment.content }}<br>
+                <small class="comment-date">{{ comment.createdAt|date('Y-m-d H:i') }}</small>
+            </li>
+        {% else %}
+            <li class="no-comments">No comments yet.</li>
+        {% endfor %}
+    </ul>
+
+    <h4 class="comment-form-title">Leave a comment</h4>
+    <div class="comment-form-wrapper">
+        {{ form_start(form) }}
+        <div class="form-group">
+            {{ form_row(form.content, {
+                'label_attr': {'class': 'form-label'},
+                'attr': {'class': 'form-input', 'placeholder': 'Write your comment...'}
+            }) }}
+        </div>
+        <button type="submit" class="btn-submit">Submit</button>
+        {{ form_end(form) }}
+    </div>
+
     <p><a href="{{ path('app_home') }}">← Back to blog</a></p>
 {% endblock %}

@@ -20,6 +20,12 @@ class Post
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $shortDescription = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $image = null;
+
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $content = null;
 
@@ -36,19 +42,19 @@ class Post
     #[ORM\JoinTable(name: 'post_category')]
     private Collection $categories;
 
+    public function __construct()
+    {
+        $this->comments = new ArrayCollection();
+        $this->categories = new ArrayCollection();
+        $this->createdAt = new \DateTime();
+    }
+
     #[ORM\PrePersist]
     #[ORM\PreUpdate]
     public function generateSlug(): void
     {
         $slugify = new Slugify();
         $this->slug = $slugify->slugify($this->title);
-    }
-
-    public function __construct()
-    {
-        $this->comments = new ArrayCollection();
-        $this->categories = new ArrayCollection();
-        $this->createdAt = new \DateTime();
     }
 
     public function getId(): ?int
@@ -104,8 +110,21 @@ class Post
         return $this;
     }
 
-    public function getComments(): Collection { return $this->comments; }
-    public function getCategories(): Collection { return $this->categories; }
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function setComments(Collection $comments): static
+    {
+        $this->comments = $comments;
+        return $this;
+    }
+
+    public function getCategories(): Collection
+    {
+        return $this->categories;
+    }
 
     public function setCategories(Collection $categories): static
     {
@@ -113,10 +132,27 @@ class Post
         return $this;
     }
 
-
-    public function setComments(Collection $comments): static
+    public function getShortDescription(): ?string
     {
-        $this->comments = $comments;
+        return $this->shortDescription;
+    }
+
+    public function setShortDescription(?string $shortDescription): static
+    {
+        $this->shortDescription = $shortDescription;
         return $this;
     }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): static
+    {
+        $this->image = $image;
+        return $this;
+    }
+
+
 }

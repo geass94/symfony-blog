@@ -234,3 +234,44 @@ h2 {
     font-weight: 600;
 }
 
+.comments-title {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: #111827;
+    font-weight: 600;
+    font-size: 1.5rem;
+}
+
+.comments-list {
+    margin-bottom: 2rem;
+    list-style-type: none;
+}
+
+.comment-item {
+    padding: 0.8rem 1rem;
+    margin-bottom: 0.8rem;
+    background: #f3f4f6;
+    border-radius: 6px;
+}
+
+.comment-date {
+    color: #6b7280;
+    font-size: 0.85rem;
+}
+
+.no-comments {
+    color: #6b7280;
+    font-style: italic;
+}
+
+.comment-form-title {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    color: #111827;
+    font-weight: 600;
+}
+
+.comment-form-wrapper {
+    margin-bottom: 2rem;
+}
+

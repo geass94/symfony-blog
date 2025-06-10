@@ -5,7 +5,7 @@
 {% block body %}
     <h2>Recent Posts</h2>
 
-    {% for post in posts %}
+    {% for post in pagination %}
         <div class="post">
             <h3 class="post-title">
                 <a href="{{ path('app_show_post', { slug: post.slug }) }}">{{ post.title }}</a>
@@ -19,6 +19,10 @@
             <p>{{ post.shortDescription|raw }}</p>
         </div>
     {% else %}
-        <p>No blog posts found.</p>
+        <p>No posts found in this category.</p>
     {% endfor %}
+
+    <div class="navigation">
+        {{ knp_pagination_render(pagination) }}
+    </div>
 {% endblock %}

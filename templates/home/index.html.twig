@@ -16,9 +16,17 @@
             <h2><a href="{{ path('app_show_category', { catId: cat.id }) }}">{{ cat.name }}</a></h2>
 
             {% for post in group %}
-                <div>
-                    <h3>{{ post.title }}</h3>
-                    <p>{{ post.content|raw }}</p>
+                <div class="post">
+                    <h3 class="post-title">
+                        <a href="{{ path('app_show_post', { slug: post.slug }) }}">{{ post.title }}</a>
+                    </h3>
+                    <div class="post-meta">
+                        Posted on {{ post.createdAt|date('F j, Y') }}
+                    </div>
+                    {% if post.image %}
+                        <img src="/uploads/posts/{{ post.image }}" width="100" height="100" />
+                    {% endif %}
+                    <p>{{ post.shortDescription|raw }}</p>
                 </div>
             {% endfor %}
         {% endif %}

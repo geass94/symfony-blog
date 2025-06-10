@@ -46,7 +46,10 @@ class PostRepository extends ServiceEntityRepository
                 $postsByCategory[$catId] = [];
             }
             if (count($postsByCategory[$catId]) < $limitPerCategory) {
-                $postsByCategory[$catId][] = $row;
+                $post = $this->getEntityManager()->getRepository(Post::class)->find($row['id']);
+                if ($post) {
+                    $postsByCategory[$catId][] = $post;
+                }
             }
         }
 

@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\CommentRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: CommentRepository::class)]
 class Comment
@@ -75,9 +76,26 @@ class Comment
         return $this;
     }
 
-    public function getPost(): ?Post { return $this->post; }
-    public function setPost(?Post $post): self { $this->post = $post; return $this; }
-    public function getUser(): ?User { return $this->user; }
-    public function setUser(?User $user): self { $this->user = $user; return $this; }
+    public function getPost(): ?Post
+    {
+        return $this->post;
+    }
+
+    public function setPost(?Post $post): self
+    {
+        $this->post = $post;
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?UserInterface $user): self
+    {
+        $this->user = $user;
+        return $this;
+    }
 
 }

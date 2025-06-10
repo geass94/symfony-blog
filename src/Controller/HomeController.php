@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class HomeController extends AbstractController
 {
-    public function __construct(private EntityManagerInterface $em)
+    public function __construct(private readonly EntityManagerInterface $em)
     {
     }
 
@@ -50,7 +50,7 @@ final class HomeController extends AbstractController
         $stmt->executeQuery(['categoryIds' => $categoryIds]);
 
         $rows = $stmt->fetchAllAssociative();
-        
+
         $postsByCategory = [];
 
         foreach ($rows as $row) {
