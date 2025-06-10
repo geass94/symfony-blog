@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+    app:
+        build:
+            context: .
+            dockerfile: local.Dockerfile
+        restart: always
+        working_dir: /var/www
+        volumes:
+            - ./:/var/www
+        depends_on:
+            - nginx
+            - mysql
+
+    nginx:
+        image: nginx:1.19.8-alpine
+        restart: always
+        tty: true
+        ports:
+            - 8000:80
+        volumes:
+            - ./:/var/www
+            - ./.docker/nginx/conf:/etc/nginx/conf.d
+
+    mysql:
+        image: mysql:8.0
+        restart: always
+        environment:
+            - MYSQL_DATABASE=laravel
+            - MYSQL_USER=laravel
+            - MYSQL_PASSWORD=secret
+            - MYSQL_ROOT_PASSWORD=secret
+            - MYSQL_CHARSET=utf8mb4
+            - MYSQL_COLLATION=utf8mb4_general_ci
+        volumes:
+            - mysql_data:/var/lib/mysql
+        ports:
+            - 3306
+
+
+volumes:
+    mysql_data:
