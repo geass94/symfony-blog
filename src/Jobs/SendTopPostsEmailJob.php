@@ -18,7 +18,6 @@ class SendTopPostsEmailJob
 
     public function __invoke(SendTopPostsEmail $message): void
     {
-        // 1. Fetch top 10 posts with most comments
         $posts = $this->em->createQuery(
             'SELECT p FROM App\Entity\Post p ORDER BY SIZE(p.comments) DESC'
         )->setMaxResults(10)->getResult();
@@ -29,7 +28,6 @@ class SendTopPostsEmailJob
             $content .= sprintf("- %s (%d comments)\n", $post->getTitle(), count($post->getComments()));
         }
 
-        // 3. Send email (example)
         $email = (new Email())
             ->from('noreply@example.com')
             ->to('admin@example.com')
