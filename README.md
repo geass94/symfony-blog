@@ -49,5 +49,13 @@ Visit the main site at:
 
 Feel free to browse posts and add comments.
 
+### Step 8: Setup cron
+Add this to crontab
+```
+# Run every Monday at 8 AM
+0 8 * * 1 /path/to/project/bin/console app:schedule-top-posts-email >> /var/log/cron.log 2>&1
+
+```
+
 
 
